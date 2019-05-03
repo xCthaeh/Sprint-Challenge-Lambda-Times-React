@@ -28,7 +28,7 @@ export default class Content extends Component {
       selected: tab
     });
   };
-
+ 
   filterCards = () => {
     if (this.state.selected === "all") {
       return this.state.cards;
