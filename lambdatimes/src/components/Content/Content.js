@@ -1,16 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Tabs from "./Tabs";
+import Cards from "./Cards";
+import { tabData, cardData } from "../../data";
+import Carousel from "../Carousel/Carousel";
+import styled from "styled-components";
 
-import Tabs from './Tabs';
-import Cards from './Cards';
 
-// Importing our tab and card data. No need to change anything here.
-import { tabData, cardData } from '../../data';
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ReturnMsg = styled.h2`
+  font-family: Didot, serif;
+  margin-bottom: 0;
+`;
 
 export default class Content extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 'all',
+      selected: "all",
       tabs: [],
       cards: []
     };
@@ -28,7 +39,7 @@ export default class Content extends Component {
       selected: tab
     });
   };
- 
+
   filterCards = () => {
     if (this.state.selected === "all") {
       return this.state.cards;
@@ -40,14 +51,18 @@ export default class Content extends Component {
   render() {
     return (
       <div className="content-container">
-      <Tabs
-          tabs={this.state.tabs}
-          selectedTab={this.state.selected}
-          selectTabHandler={this.changeSelected}
-        />
+        <ContentContainer>
+          <Tabs
+            tabs={this.state.tabs}
+            selectedTab={this.state.selected}
+            selectTabHandler={this.changeSelected}
+          />
+          <ReturnMsg>Alas, {window.localStorage.getItem("user")} has returned!</ReturnMsg>
+          <Carousel />
+          <Cards cards={this.filterCards()} />
+        </ContentContainer>
         <Cards cards={this.filterCards()} />
       </div>
     );
   }
 }
-
