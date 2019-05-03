@@ -4,7 +4,7 @@ import Cards from "./Cards";
 import { tabData, cardData } from "../../data";
 import Carousel from "../Carousel/Carousel";
 import styled from "styled-components";
-
+import Authenticate from "../Authenticate";
 
 const ContentContainer = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const ReturnMsg = styled.h2`
   margin-bottom: 0;
 `;
 
-export default class Content extends Component {
+class Content extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,19 +50,18 @@ export default class Content extends Component {
 
   render() {
     return (
-      <div className="content-container">
-        <ContentContainer>
-          <Tabs
-            tabs={this.state.tabs}
-            selectedTab={this.state.selected}
-            selectTabHandler={this.changeSelected}
-          />
-          <ReturnMsg>Alas, {window.localStorage.getItem("user")} has returned!</ReturnMsg>
-          <Carousel />
-          <Cards cards={this.filterCards()} />
-        </ContentContainer>
+      <ContentContainer>
+        <Tabs
+          tabs={this.state.tabs}
+          selectedTab={this.state.selected}
+          selectTabHandler={this.changeSelected}
+        />
+        <ReturnMsg>Alas, {window.localStorage.getItem("user")} has returned!</ReturnMsg>
+        <Carousel />
         <Cards cards={this.filterCards()} />
-      </div>
+      </ContentContainer>
     );
   }
 }
+
+export default Authenticate(Content);
