@@ -45,13 +45,13 @@ const Authenticate = ReactComponent => {
           });
         } else {
           this.setState({
-            error: <div>Username is too long.</div>,
+            error: <div>Username is too long</div>,
             errorState: "true"
           });
         }
       } else {
         this.setState({
-          error: <div>Username or Password field is empty.</div>,
+          error: <div>Username and/or Password field empty</div>,
           errorState: "true"
         });
       }
